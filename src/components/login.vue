@@ -33,6 +33,7 @@
     export default {
         data() {
             return {
+                //数据对象，使用时请修改对象属性名称以及，数据绑定的属性名称
                 form:{
                     userName:'',
                     userpass:'',

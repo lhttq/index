@@ -3,7 +3,7 @@ import login from '@/components/login.vue';
 import register from '@/components/register.vue';
 var router = new VueRouter({
     routes:[
-        {path:'/',component: login},
+        {path:'/',component: register},
         {path:'/login',component:login},
         {path: '/register',component: register},
     ]

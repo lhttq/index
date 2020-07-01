@@ -1,6 +1,7 @@
 # login 登录
  
- vue + elementUI + mintUI + axios异步
+ vue + layui + mintUI + axios异步
+ layui样式，mintUI的 Toast 消息提示，axios异步请求，vue数据处理实现登录
 
 ## Project setup
 ```

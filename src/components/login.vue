@@ -30,7 +30,6 @@
 <script>
     import { Toast } from 'mint-ui';
     import axios from 'axios';
-
     export default {
         data() {
             return {
@@ -56,8 +55,10 @@
                 axios
                     .post('/users/selectByuserName',this.form)
                     .then(response => {
+                        //测试服务端的返回0或1，0为密码错误或账号不存在，1为登录成功
                         this.info = response;
                         if(this.info.data == 1){
+                            //使用mintUI的Toast的消息提示
                             Toast("登录成功");
                         }else{
                             Toast("密码错误");

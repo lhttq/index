@@ -4,6 +4,8 @@ import 'normalize.css/normalize.css'
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 
+import layui from 'layui-src/build/layui.js'
+import 'layui-src/build/css/layui.css'
 import App from './App.vue';
 import VueRouter from 'vue-router';
 import axios from 'axios';
@@ -17,6 +19,7 @@ import './css/main.css';
 Vue.use(ElementUI);
 Vue.use(VueRouter);
 Vue.use(MintUI);
+Vue.use(layui);
 Vue.prototype.$axios = axios;
 axios.defaults.baseURL = '/api';  //关键代码
 Vue.config.productionTip = false;

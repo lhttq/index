@@ -1,14 +1,29 @@
 <template>
     <div class="login">
-        <el-form ref="form" :model="form" label-width="80px">
-            <el-form-item>
-                <el-input v-model="form.name" placeholder="account"></el-input>
-            </el-form-item>
-            <el-form-item>
-                <el-input type="password" placeholder="password" v-model="form.pass"></el-input>
-            </el-form-item>
-            <el-button type="primary" @click="onSubmit">登录</el-button>
-        </el-form>
+        <form class="layui-form" action="">
+            <div class="layui-form-item">
+                <label id="title" class="layui-form-label">登录账号</label>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">账号</label>
+                <div class="layui-input-block">
+                    <input type="text" v-model="form.userName" name="account" required  lay-verify="required" placeholder="请输入账号" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">密码</label>
+                <div class="layui-input-block">
+                    <input type="password" v-model="form.userpass" name="password" required lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                    <button @click="onSubmit" class="layui-btn ayui-btn-fluid" onclick="return false">立即提交</button>
+                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+            </div>
+        </form>
+        <div id="footer">
+            <a href="">忘记密码？</a>
+        </div>
     </div>
 </template>
 
@@ -19,29 +34,34 @@
     export default {
         data() {
             return {
-                form: {
-                    name:'',
-                    pass:'',
+                form:{
+                    userName:'',
+                    userpass:'',
                 },
+
                 info:'',
             }
         },
         methods: {
 
             onSubmit() {
-                if(this.form.name == '') {
+                if(this.form.userName == '') {
                     Toast("账号不能为空");
                     return;
                 }
-                if (this.form.pass == ''){
+                if (this.form.userpass == ''){
                     Toast("密码不能为空");
                     return;
                 }
                 axios
-                    .get('/sopts/selectAll')
+                    .post('/users/selectByuserName',this.form)
                     .then(response => {
                         this.info = response;
-                        console.log(this.info);
+                        if(this.info.data == 1){
+                            Toast("登录成功");
+                        }else{
+                            Toast("密码错误");
+                        }
                     })
                     .catch(function (error) { // 请求失败处理
                         console.log(error);
@@ -52,13 +72,29 @@
 </script>
 
 <style scoped>
+    #title{
+        width: 100px;
+        font-size: 1.5em;
+    }
     .login{
-        right: 0;
-        left: 0;
-        margin: auto;
+        width: 100%;
+        height: 64%;
+        max-height: 80%;
+        box-shadow: 2px 2px 2px lavender;
+    }
+    input{
         width: 80%;
     }
-    .btn{
-        background: dodgerblue;
+    #footer{
+        height: 19%;
+        bottom: 0;
+        background-color: #ffc211;
+    }
+    #footer>a{
+        display: block;
+        padding: 15px;
+        box-sizing: border-box;
+        color: #fff;
+        text-align: center;
     }
 </style>
